@@ -1,0 +1,1152 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Swap Hall</title>
+<meta name="google" content="notranslate">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root{
+  /* Layout: the overview is one reading column with a four-stage timeline. The prototype is a website: on a laptop, a full-width header with a centred page (760px); on a phone (the backup), one column with a sticky header. Tasks 2 and 5 start in a plain email inbox. */
+  --bg:#eef1f4;
+  --surface:#ffffff;
+  --surface-2:#e4e9ee;
+  --ink:#121820;
+  --muted:#4f5c6a;
+  --line:#cfd6de;
+  --accent:#2a4bd0;
+  --accent-ink:#ffffff;
+  --accent-soft:#e3e8fb;
+  --good:#16714a;
+  --good-soft:#dff1e8;
+  --warn:#8a4f00;
+  --warn-soft:#f8ecd6;
+  --shadow:0 1px 2px rgba(18,24,32,.06),0 6px 20px rgba(18,24,32,.07);
+  --mail-bar:#2f3a48;
+  --mail-bar-ink:#ffffff;
+  --font-display:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --font-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0d1116;--surface:#151b22;--surface-2:#1d252f;--ink:#e7ecf2;--muted:#a3aebb;--line:#2b3542;
+    --accent:#8ea4ff;--accent-ink:#0b1020;--accent-soft:#1c2747;--good:#6fd3a0;--good-soft:#132a20;
+    --warn:#f1b45c;--warn-soft:#2c2213;--shadow:0 1px 2px rgba(0,0,0,.4),0 6px 20px rgba(0,0,0,.35);
+    --mail-bar:#26303c;--mail-bar-ink:#e7ecf2;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0d1116;--surface:#151b22;--surface-2:#1d252f;--ink:#e7ecf2;--muted:#a3aebb;--line:#2b3542;
+  --accent:#8ea4ff;--accent-ink:#0b1020;--accent-soft:#1c2747;--good:#6fd3a0;--good-soft:#132a20;
+  --warn:#f1b45c;--warn-soft:#2c2213;--shadow:0 1px 2px rgba(0,0,0,.4),0 6px 20px rgba(0,0,0,.35);
+  --mail-bar:#26303c;--mail-bar-ink:#e7ecf2;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body,#app{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.5;-webkit-text-size-adjust:100%}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+button:disabled{cursor:not-allowed}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--font-display);line-height:1.15;text-wrap:balance;margin:0}
+p{margin:0}
+ul,ol{margin:0}
+.small{font-size:.875rem;color:var(--muted)}
+.eyebrow{font-size:.76rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.title{font-size:1.6rem;font-weight:700}
+.h2{font-size:1.15rem;font-weight:700}
+.h3{font-size:1rem;font-weight:700;font-family:var(--font-body)}
+.pill{display:inline-flex;align-self:flex-start;align-items:center;gap:6px;border-radius:999px;padding:3px 10px;background:var(--surface-2);font-size:.85rem;font-weight:700}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:10px 18px;border-radius:12px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);font-weight:700;width:100%;text-align:center;text-decoration:none;transition:filter .15s}
+.btn:hover{filter:brightness(1.06)}
+.btn-quiet{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.small{min-height:36px;width:auto;padding:5px 12px;font-size:.9rem;border-radius:10px}
+.link-btn{background:none;border:0;padding:8px 0;min-height:44px;color:var(--accent);font-weight:700;text-decoration:underline;text-underline-offset:3px;align-self:flex-start;text-align:left}
+.back{align-self:flex-start;background:none;border:0;padding:4px 8px 4px 0;min-height:44px;color:var(--accent);font-weight:700;display:inline-flex;gap:4px;align-items:center}
+.actions{margin-top:auto;display:flex;flex-direction:column;gap:10px;padding-top:8px}
+.actions.sticky{position:sticky;bottom:0;z-index:4;background:var(--surface);margin-inline:-16px;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
+.clock{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.clock>div{border:1px solid var(--line);border-radius:12px;padding:10px 12px;display:grid;gap:1px;align-content:start}
+.clock span{font-size:.8rem;color:var(--muted)}
+.clock strong{font-size:1.05rem}
+
+/* Prototype: one column on a phone; the laptop layout is further down */
+.site,.mail{position:relative;max-width:420px;margin-inline:auto;min-height:100%;background:var(--surface);display:flex;flex-direction:column}
+@media (min-width:460px) and (max-width:699.98px){.site,.mail{border-inline:1px solid var(--line);box-shadow:var(--shadow)}}
+.appbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--surface);border-bottom:1px solid var(--line)}
+.logo{width:34px;height:34px;border-radius:10px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;flex:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;touch-action:manipulation}
+.appname{font-family:var(--font-display);font-weight:700;font-size:1.05rem}
+.appname small{display:block;font-family:var(--font-body);font-weight:400;font-size:.75rem;color:var(--muted);line-height:1.2}
+.appbar-link{margin-left:auto;background:none;border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:.85rem}
+.screen{flex:1;padding:16px 16px 32px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.screen.ready{justify-content:center;align-items:center;text-align:center;gap:8px}
+.scenario{margin:12px 16px 0;padding:10px 12px;border-radius:12px;background:var(--accent-soft);font-size:.92rem}
+.scenario b{display:block;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+
+/* Round 1 */
+.tlist,.mlist{list-style:none;padding:0;display:flex;flex-direction:column;gap:10px}
+.tcard{border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;gap:3px}
+.tcard-head,.mrow-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.tcode{font-family:var(--font-mono);font-weight:500;font-size:.92rem;background:var(--surface-2);border-radius:6px;padding:1px 6px}
+.twhen{font-weight:700}
+.tmeta,.tintro{font-size:.9rem;color:var(--muted)}
+.demand{display:flex;align-items:center;gap:10px;margin-top:6px}
+.bar{flex:1;height:8px;border-radius:99px;background:var(--surface-2);overflow:hidden}
+.bar>span{display:block;height:100%;background:var(--accent)}
+.bar.over>span{background:var(--warn)}
+.dnum{font-family:var(--font-mono);font-size:.84rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.field{display:flex;flex-direction:column;gap:8px}
+.field label{font-weight:700}
+.field input{min-height:52px;border:1.5px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--surface);font-family:var(--font-mono);font-size:1.15rem;letter-spacing:.04em;text-transform:uppercase}
+.field input:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px var(--accent-soft)}
+.err{color:var(--warn);background:var(--warn-soft);border-radius:10px;padding:8px 12px;font-size:.92rem;font-weight:700}
+.group-banner{border-radius:12px;background:var(--good-soft);padding:12px 14px;display:grid;gap:2px}
+.group-banner strong{color:var(--good)}
+.group-banner.solo{background:var(--surface-2)}
+.group-banner.solo strong{color:var(--ink)}
+.members{list-style:none;padding:0;margin-top:4px;display:flex;gap:16px;font-size:.9rem;flex-wrap:wrap}
+.members .ok{color:var(--good);font-weight:700}
+.mrow{border:1px solid var(--line);border-radius:12px;padding:10px 12px;display:grid;gap:8px}
+.mrow-head span:last-child{font-size:.9rem;color:var(--muted)}
+.seg{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:6px}
+.seg button{min-height:42px;border-radius:10px;border:1px solid var(--line);background:var(--surface);font-weight:700;font-size:.9rem;padding:4px 6px}
+.seg button[aria-pressed="true"][data-kind="first"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.seg button[aria-pressed="true"][data-kind="ok"]{background:var(--accent-soft);border-color:var(--accent)}
+.seg button[aria-pressed="true"][data-kind="cant"]{background:var(--warn-soft);border-color:var(--warn);color:var(--warn)}
+.seg button:disabled{opacity:.6}
+.note{font-size:.85rem;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{min-height:42px;border-radius:999px;border:1px solid var(--line);background:var(--surface);padding:6px 14px;font-weight:700;display:inline-flex;flex-direction:column;align-items:flex-start;line-height:1.2;justify-content:center}
+.chip small{font-weight:400;font-size:.75rem;color:var(--muted)}
+.chip[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent)}
+.chip:disabled{opacity:.55}
+.chip.clash small{color:var(--warn)}
+.chip.auto{cursor:default}
+.summary{margin:0;display:grid;gap:8px}
+.summary>div{display:grid;grid-template-columns:7.5rem minmax(0,1fr);gap:8px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.summary dt{color:var(--muted);font-size:.9rem}
+.summary dd{margin:0;font-weight:700}
+.done{display:flex;align-items:center;gap:12px}
+.done-mark{width:40px;height:40px;border-radius:50%;background:var(--good);color:var(--surface);display:grid;place-items:center;font-weight:700;font-size:1.2rem;flex:none}
+.done-mark.off{background:var(--muted)}
+.callout{border-radius:12px;padding:12px 14px;background:var(--surface-2);display:grid;gap:4px}
+.callout.good{background:var(--good-soft)}
+.steps{padding-left:1.3rem;display:grid;gap:12px}
+
+/* Lottery ticket */
+.ticket{border-radius:16px;background:var(--accent);color:var(--accent-ink);overflow:hidden}
+.ticket-main{padding:18px 18px 16px;display:grid;gap:2px}
+.ticket-main .tcode{font-size:1.7rem;background:transparent;padding:0;color:var(--accent-ink)}
+.ticket-main .twhen{font-size:1.2rem}
+.ticket-main span:last-child{opacity:.88}
+.ticket-stub{position:relative;border-top:2px dashed color-mix(in srgb,var(--accent-ink) 45%,transparent);padding:12px 18px;font-weight:700}
+.ticket-stub::before,.ticket-stub::after{content:"";position:absolute;top:-10px;width:18px;height:18px;border-radius:50%;background:var(--surface)}
+.ticket-stub::before{left:-9px}
+.ticket-stub::after{right:-9px}
+
+/* Swap Hall */
+.mine{display:grid;gap:1px;padding:10px 12px;border-radius:12px;background:var(--surface-2)}
+.mine span{font-size:.85rem;color:var(--muted)}
+.next{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.next .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft);flex:none}
+.board-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+.board{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.board caption{text-align:left;padding:10px 12px 2px;font-size:.74rem;color:var(--muted);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.board th,.board td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:right;vertical-align:middle}
+.board th[scope="row"],.board thead th:first-child{text-align:left}
+.board thead th{font-size:.78rem;color:var(--muted);font-weight:700;line-height:1.2}
+.board td{font-family:var(--font-mono);font-size:1.05rem}
+.board tbody tr:last-child th,.board tbody tr:last-child td{border-bottom:0}
+.board tr.me{background:var(--accent-soft)}
+.board tr.grp{background:var(--good-soft)}
+.tsub{display:block;font-size:.78rem;color:var(--muted);font-weight:400}
+.tag{display:inline-block;margin-left:4px;font-size:.68rem;font-weight:700;border-radius:999px;padding:1px 7px;background:var(--accent);color:var(--accent-ink);vertical-align:middle;font-family:var(--font-body)}
+.tag-grp{background:var(--good);color:var(--surface)}
+.grid-wrap{overflow-x:auto}
+.cantgrid{border-collapse:separate;border-spacing:5px;width:100%;margin-left:-5px}
+.cantgrid th{font-size:.78rem;color:var(--muted);font-weight:700;text-align:left;padding:0 2px}
+.cantgrid thead th{text-align:center;line-height:1.2}
+.cantgrid thead th small{display:block;font-weight:400}
+.cantgrid td button{width:100%;min-height:40px;border-radius:8px;border:1px solid var(--line);background:var(--surface);font-size:.8rem;color:var(--muted)}
+.cantgrid td button[aria-pressed="true"]{background:var(--warn-soft);border-color:var(--warn);color:var(--warn);font-weight:700}
+.switch{display:flex;align-items:center;gap:10px;font-weight:700}
+.switch input{width:22px;height:22px;accent-color:var(--accent);flex:none}
+.req{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1.4fr);align-items:center;gap:10px;border:1px solid var(--line);border-radius:12px;padding:12px}
+.req>div{display:grid;gap:1px;min-width:0}
+.req span{font-size:.8rem;color:var(--muted)}
+.req strong{font-family:var(--font-mono);font-size:1.02rem;font-weight:500;overflow-wrap:anywhere}
+.req-arrow{font-size:1.4rem;color:var(--muted)}
+.myreq{border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;gap:10px}
+.myreq-row{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.myreq-row .mono{overflow-wrap:anywhere;min-width:0}
+.status{font-size:.85rem;font-weight:700;color:var(--accent)}
+.status.off{color:var(--muted)}
+.defs{margin:0;display:grid;gap:10px}
+.defs>div{border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.defs dt{font-weight:700}
+.defs dd{margin:0;color:var(--muted)}
+.optlist{display:grid;gap:8px}
+.opt{min-height:48px;border-radius:12px;border:1px solid var(--line);background:var(--surface);text-align:left;padding:10px 14px;font-weight:700}
+.opt[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.inline-row{display:flex;gap:8px;flex-wrap:wrap}
+
+/* Email (tasks 2 and 5 start in the student's inbox) */
+.mailbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--mail-bar);color:var(--mail-bar-ink)}
+.mailicon{width:34px;height:34px;border-radius:10px;background:var(--mail-bar-ink);color:var(--mail-bar);display:grid;place-items:center;flex:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;touch-action:manipulation}
+.mailname{font-weight:700;font-size:1.05rem;line-height:1.2}
+.mailname small{display:block;font-weight:400;font-size:.75rem;opacity:.85}
+.mailclock{margin-left:auto;font-size:.88rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.mailbar .appbar-link{margin-left:4px;border-color:currentColor;color:var(--mail-bar-ink)}
+.mailmain{flex:1;display:flex;flex-direction:column;min-width:0}
+.inbox-head{display:flex;align-items:baseline;gap:10px;padding:14px 16px 10px}
+.inbox-head h1{font-size:1.3rem}
+.inbox{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.mailrow{width:100%;display:grid;grid-template-columns:10px minmax(0,1fr) auto;gap:1px 8px;align-items:baseline;text-align:left;background:var(--surface);border:0;border-bottom:1px solid var(--line);padding:11px 16px 11px 10px;font-weight:400}
+.mailrow:hover{background:var(--surface-2)}
+.mailrow[aria-current="true"]{background:var(--accent-soft)}
+.m-dot{grid-row:1;grid-column:1;width:8px;height:8px;border-radius:50%;align-self:center}
+.mailrow.unread .m-dot{background:var(--accent)}
+.m-from,.m-subj,.m-prev{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.m-from{grid-row:1;grid-column:2}
+.m-time{grid-row:1;grid-column:3;font-size:.82rem;color:var(--muted);white-space:nowrap}
+.m-subj{grid-row:2;grid-column:2 / -1}
+.m-prev{grid-row:3;grid-column:2 / -1;font-size:.88rem;color:var(--muted)}
+.mailrow.unread .m-from,.mailrow.unread .m-subj{font-weight:700}
+.mailrow.unread .m-time{color:var(--accent);font-weight:700}
+.reader{padding:16px;display:grid;gap:14px;align-content:start;min-width:0}
+.reader-empty{color:var(--muted);text-align:center;padding:48px 16px}
+.msg-head{display:grid;gap:4px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.msg-head h2{font-size:1.35rem}
+.msg-meta{font-size:.9rem;color:var(--muted)}
+.msg-body{display:grid;gap:12px;max-width:34rem}
+.msg-brand{display:flex;align-items:center;gap:8px;font-family:var(--font-display);font-weight:700;font-size:1.05rem}
+.msg-brand .logo{width:28px;height:28px;border-radius:8px}
+.msg-body .btn{width:auto;justify-self:start;min-width:12rem}
+@media (max-width:699.98px){
+  .mailmain.is-open .inbox{display:none}
+  .mailmain.is-open .inbox-head{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .mailmain:not(.is-open) .reader{display:none}
+}
+@media (max-width:399.98px){.mailbar:has(.appbar-link) .mailclock{display:none}}
+
+/* Laptop: a website with a full-width header and a centred page; the inbox shows the list and the open email side by side */
+@media (min-width:700px){
+  .site,.mail{max-width:none;background:var(--bg)}
+  .appbar{padding:12px max(24px,calc((100% - 760px) / 2))}
+  .scenario{width:min(760px,calc(100% - 48px));margin:20px auto 0}
+  .screen{flex:none;width:min(760px,calc(100% - 48px));margin:24px auto 56px;padding:28px 32px 32px;gap:18px;background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
+  .screen:has(> .actions.sticky:last-child){padding-bottom:0}
+  .actions.sticky{margin-inline:-32px;padding:14px 32px 16px;border-radius:0 0 15px 15px}
+  .screen.ready{min-height:min(420px,60vh)}
+  .title{font-size:1.9rem}
+  .screen .btn:not(.small){width:auto;min-width:220px;align-self:flex-start;justify-self:start}
+  .actions{flex-direction:row;flex-wrap:wrap;align-items:center}
+  .actions .err{flex-basis:100%}
+  .field input{max-width:22rem}
+  .tcard{grid-template-columns:minmax(0,1fr) minmax(13rem,15rem);column-gap:28px}
+  .tcard>*{grid-column:1}
+  .tcard .demand{grid-column:2;grid-row:1 / span 3;align-self:center;margin-top:0}
+  .mrow{grid-template-columns:minmax(0,1fr) minmax(0,25rem);align-items:center;column-gap:20px}
+  .mrow .note{grid-column:1 / -1}
+  .ticket{max-width:28rem}
+  .optlist{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .mailbar{padding:10px max(24px,calc((100% - 1040px) / 2))}
+  .mail .scenario{width:min(1040px,calc(100% - 48px))}
+  .mailmain{flex:none;display:grid;grid-template-columns:minmax(260px,340px) minmax(0,1fr);width:min(1040px,calc(100% - 48px));margin:24px auto 56px;background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;min-height:min(520px,calc(100vh - 140px))}
+  .inboxpane{border-right:1px solid var(--line)}
+  .reader{padding:24px 32px}
+  .reader .back{display:none}
+}
+
+/* Facilitator panel */
+.panel{position:fixed;inset:0;z-index:50;background:var(--bg);overflow-y:auto;padding:calc(env(safe-area-inset-top,0px) + 12px) 16px calc(env(safe-area-inset-bottom,0px) + 28px)}
+.panel-inner{max-width:640px;margin:0 auto;display:grid;gap:14px}
+.panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.panel-head h2{font-size:1.35rem}
+.psec{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:grid;gap:10px;min-width:0}
+.psec h3{font-size:1rem}
+.prow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.prow label{font-weight:700}
+.prow select{min-height:36px;border-radius:10px;border:1px solid var(--line);background:var(--surface);padding:4px 8px}
+.ptask{border-top:1px solid var(--line);padding-top:10px;display:grid;gap:6px}
+.ptask:first-of-type{border-top:0;padding-top:0}
+.ptask-head{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.ptask.is-active .ptask-head strong{color:var(--accent)}
+.pstatus{font-size:.9rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.score{display:inline-flex;gap:4px;margin-left:auto;align-items:center}
+.score>span{font-size:.8rem;color:var(--muted);margin-right:2px}
+.score button{width:36px;height:36px;border-radius:8px;border:1px solid var(--line);background:var(--surface);font-weight:700}
+.score button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.score button:disabled{opacity:.45}
+details summary{cursor:pointer;color:var(--accent);font-weight:700;font-size:.9rem}
+details[open] summary{margin-bottom:8px}
+.say{font-size:.92rem}
+.cardtext{background:var(--surface-2);border-radius:10px;padding:10px 12px;font-size:.92rem}
+.script{display:grid;gap:6px;font-size:.92rem}
+.script ol{padding-left:1.2rem;display:grid;gap:4px}
+#summary,#archive{width:100%;min-height:10rem;border:1px solid var(--line);border-radius:10px;padding:10px;font-family:var(--font-mono);font-size:.78rem;background:var(--surface-2);color:var(--ink);resize:vertical}
+.psec.quick{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.confirm{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--warn-soft);border-radius:10px;padding:8px 10px;font-weight:700}
+
+/* Overview page */
+.about{max-width:1040px;margin:0 auto;padding:20px 16px 56px;display:grid;gap:44px}
+.about-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:700;font-size:1.1rem}
+.hero{display:grid;gap:14px;max-width:46rem}
+.hero h1{font-size:clamp(2.6rem,8vw,4.4rem);font-weight:700;letter-spacing:-.025em}
+.lede{font-size:clamp(1.2rem,2.8vw,1.55rem);font-family:var(--font-display);font-weight:600;line-height:1.25}
+.hero p{max-width:65ch}
+.cta{display:flex;flex-wrap:wrap;gap:10px}
+.cta .btn{width:auto}
+.section{display:grid;gap:16px}
+.section>h2{font-size:clamp(1.45rem,3.6vw,2.05rem)}
+.section>p{max-width:65ch}
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:12px}
+.plain{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:6px;align-content:start}
+.plain h3{font-size:1.1rem}
+.plain p{color:var(--muted)}
+.rounds{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:12px}
+.round{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:10px;align-content:start}
+.round .eyebrow{color:var(--accent)}
+.round h3{font-size:1.3rem}
+.round ul{padding-left:1.1rem;display:grid;gap:6px}
+.timeline{list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media (max-width:820px){.timeline{grid-template-columns:1fr}}
+.stage{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;display:grid;gap:6px;align-content:start}
+.stage h3{font-size:1.05rem}
+.stage p{font-size:.92rem;color:var(--muted)}
+.stage p strong{color:var(--ink)}
+.dots{display:grid;grid-template-columns:repeat(14,8px);gap:4px;min-height:8px}
+.dots i{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.dots i.o{background:transparent;border:1.5px solid var(--accent)}
+.tiers,.moves{padding-left:1.3rem;display:grid;gap:8px;max-width:65ch}
+.try{display:grid;grid-template-columns:1fr;gap:12px}
+@media (min-width:560px){.try{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:900px){.try{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.trycard{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.trycard p{color:var(--muted);font-size:.95rem}
+.trycard .btn{width:auto;align-self:flex-start;margin-top:auto}
+/* Cards side by side share their rows, so titles, descriptions and the Open buttons line up across each row. */
+@supports (grid-template-rows:subgrid){
+  .trycard{display:grid;grid-row:span 4;grid-template-rows:subgrid;row-gap:10px}
+  .trycard .btn{justify-self:start;align-self:start;margin-top:0}
+}
+.swapdemo{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:12px;align-items:center;max-width:46rem}
+.sd-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:grid;gap:8px}
+.sd-row{display:grid;grid-template-columns:3.2rem 3.4rem minmax(0,1fr);gap:8px;align-items:center}
+.sd-who{font-weight:700}
+.sd-seat{font-family:var(--font-mono);font-weight:500;text-align:center;border-radius:8px;padding:2px 0;background:var(--surface-2)}
+.sd-seat.sd-new{background:var(--good-soft);color:var(--good)}
+.sd-want{color:var(--muted);font-size:.92rem}
+.sd-arrow{font-size:1.6rem;color:var(--muted)}
+@media (max-width:560px){.swapdemo{grid-template-columns:1fr}.sd-arrow{transform:rotate(90deg);justify-self:center;line-height:1}}
+.foot{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:.875rem;display:grid;gap:4px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+
+<div id="app"></div>
+
+<script>
+(() => {
+  'use strict';
+  /* The test runs in English: tell screen readers the language, and stop the browser from offering (or auto-applying) a translation. */
+  const root = document.documentElement;
+  if (!root.lang) root.lang = 'en';
+  root.setAttribute('translate', 'no');
+
+  /* ---------- Data (all made up for testing) ---------- */
+  const T = [
+    {id:'T01', day:'Mon', dayName:'Monday',    time:'10:00am', part:'morning',   tutor:'Alex', room:'Room 2.10', applied:18, seats:20, wantIn:2,  wantOut:1, free:0, intro:'Hands-on sketching and lots of group work.'},
+    {id:'T02', day:'Tue', dayName:'Tuesday',   time:'3:00pm',  part:'afternoon', tutor:'Sam',  room:'Room 2.12', applied:25, seats:20, wantIn:4,  wantOut:2, free:0, intro:'Short talks, then studio time.'},
+    {id:'T03', day:'Wed', dayName:'Wednesday', time:'2:00pm',  part:'afternoon', tutor:'Lee',  room:'Room 3.14', applied:62, seats:20, wantIn:30, wantOut:1, free:0, intro:'Detailed feedback on every draft.'},
+    {id:'T04', day:'Thu', dayName:'Thursday',  time:'11:00am', part:'morning',   tutor:'Jo',   room:'Room 3.18', applied:9,  seats:20, wantIn:0,  wantOut:1, free:0, intro:'Calm pace with step-by-step examples.'},
+    {id:'T05', day:'Fri', dayName:'Friday',    time:'9:00am',  part:'morning',   tutor:'Kim',  room:'Room 4.01', applied:8,  seats:20, wantIn:1,  wantOut:2, free:0, intro:'Early start, small-group critiques.'}
+  ];
+  const byId = id => T.find(t => t.id === id);
+  const DAYS = ['Mon','Tue','Wed','Thu','Fri'];
+  const PARTS = [['morning','Morning','before 12pm'],['afternoon','Afternoon','12–6pm'],['evening','Evening','after 6pm']];
+  const GROUP_CODE = 'GRP-4821';
+
+  const TASKS = {
+    1:{start:'1A', end:'1D', name:'Apply with Mia’s group',
+       say:'Task 1 is about applying for a tutorial with a friend.',
+       card:'You and your friend Mia want to be in the same IDEA9106 tutorial. Mia sent you her group code: GRP-4821. Join her group and set your choices: Wednesday 2pm (T03) is your first choice, Tuesday 3pm (T02) is OK, and you can’t do Mondays.',
+       success:'Joins GRP-4821, marks T03 First choice and T02 OK, rules out Monday (T01 Can’t or Mon ticked), and submits.',
+       timer:'The timer stops by itself on “Your choices are in”.'},
+    2:{start:'2A', end:null, name:'Read the lottery result',
+       say:'Task 2 is about your lottery result. It’s now Friday, 6pm.',
+       card:'The lottery results are out. Find out which tutorial you and Mia got, and why.',
+       success:'Says “we’re both in T02” and explains that T03 had 62 applicants for 20 seats.',
+       timer:'When they have said the result and the reason, press End task.'},
+    3:{start:'3A', end:'3D', name:'Request a tutorial (job)',
+       say:'For Task 3, you’ll play a different student who has a part-time job.',
+       card:'Now imagine you are a different student. You are in T03 (Wednesday 2pm), but you just started a part-time job every Wednesday from 1pm to 6pm. Use the Swap Hall to ask for a tutorial that fits around your job.',
+       success:'Posts a request to leave T03 (picks tutorials that fit, or marks Wednesday afternoon) and can say they keep T03 until a swap happens.',
+       after:'Ask: “What do you think will happen next?”',
+       timer:'The timer stops by itself on “Request posted”.'},
+    4:{start:'4A', end:'4D', name:'Decide whether to wait',
+       say:'Task 4 is about deciding whether to keep waiting.',
+       card:'Imagine you are in T05 (Friday 9am), and your group members are all in T03. Use the Swap Hall to decide whether it’s worth waiting for a place in T03. Do what you would really do, and tell us what you decide and why.',
+       success:'Finds T03’s numbers (30 want in, 1 wants out, 0 free) and gives a reasoned decision.',
+       after:'Ask: “Using Swap Hall, how sure are you about whether to keep waiting, from 1 (not sure at all) to 5 (very sure)? And how anxious would you feel waiting, from 1 (not at all) to 5 (very)?”',
+       timer:'The timer stops by itself if they post a request. Not posting also counts: press End task after the rating question.'},
+    5:{start:'5A', end:null, name:'Read the 9pm result',
+       say:'For Task 5, it’s now 9:05pm.',
+       before:'If they didn’t post a request in Task 4, first say: “Imagine you posted a request to move to T03.”',
+       card:'It’s now 9:05pm and you have a new email from Swap Hall. Find out what happened to your request and what you can do next.',
+       success:'Says they’re still in T05, why (30 people asked for 1 place), and one next step.',
+       after:'Ask: “How fair does this result feel to you, from 1 (very unfair) to 5 (very fair)? Why?”',
+       timer:'After the fairness question, press End task.'}
+  };
+  const TASK_VIEWS = {1:['1A','1B','1C','1D','2C'], 2:['2A','2B','2C'], 3:['3A','3B','3C','3D','4B'], 4:['4A','4B','4C','4D'], 5:['5A','5B']};
+  const SCEN = {
+    1:'You and Mia want the same IDEA9106 tutorial. Mia’s group code is GRP-4821.',
+    2:'Round 1 results are out. You applied with Mia.',
+    3:'You’re in T03 (Wed 2pm) and just started a job every Wednesday, 1–6pm.',
+    4:'You’re in T05 (Fri 9am). Your group is in T03.',
+    5:'It’s 9:05pm. Earlier you asked to move from T05 to T03.'
+  };
+
+  /* ---------- State ---------- */
+  const STORE = 'swaphall-test-v1';
+  const freshT1 = () => ({code:'', codeErr:'', joined:false, solo:false, marks:{}, cantDays:[], prev:{}, err:''});
+  const freshT3 = () => ({dest:[], anyFit:false, cant:[], err:'', final:[], posted:false, cancelled:false});
+  const freshT4 = () => ({extra:[], posted:false, cancelled:false});
+  const freshT5 = () => ({choice:null, added:[], saved:false, groupSent:false, cancelled:false});
+  /* sessionNo is what the Session menu shows (the next session once you change it); runNo is the session the current results belong to. */
+  const fresh = () => ({v:1, view:'about', mode:'explore', scenario:null, panel:false, confirmNew:false, mail:null, mailSeen:[],
+    sessionNo:'1', runNo:null, tasks:{}, active:null, lastTask:null, numbersBack:'4A', lotteryBack:'2B',
+    t1:freshT1(), t3:freshT3(), t4:freshT4(), t5:freshT5()});
+  function load(){
+    try { const raw = localStorage.getItem(STORE); if (!raw) return null; const s = JSON.parse(raw); return s && s.v === 1 ? s : null; }
+    catch (e) { return null; }
+  }
+  function save(){ try { localStorage.setItem(STORE, JSON.stringify(S)); } catch (e) { /* storage blocked: keep working in memory */ } }
+  const saved = load();
+  let S = saved || fresh();
+  if (S.mode !== 'session') { S.view = 'about'; S.panel = false; }
+
+  /* ---------- Helpers ---------- */
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const tLabel = id => { const t = byId(id); return `${t.id} ${t.day} ${t.time}`; };
+  const fmt = ms => { const s = Math.max(0, Math.round(ms / 1000)); return `${String(Math.floor(s / 60)).padStart(2,'0')}:${String(s % 60).padStart(2,'0')}`; };
+  const secs = start => Math.round((Date.now() - start) / 1000);
+  const LOGO = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h14l-3.5-3.5"/><path d="M20 16H6l3.5 3.5"/></svg>';
+  const fits = (cant, current) => T.filter(t => t.id !== current && !cant.includes(`${t.day}-${t.part}`)).map(t => t.id);
+
+  function ev(text){
+    if (S.mode !== 'session') return;
+    const n = S.active || S.lastTask, t = n && S.tasks[n];
+    if (t) t.events.push([t.end ? text + ' (after end)' : text, secs(t.start)]);
+  }
+
+  /* ---------- Navigation and task timing ---------- */
+  /* A quick second tap would land on the next screen's main button (same spot), skipping 3C or 4C, or undo a cancel straight away. Ignore taps for 400ms after a screen change, a cancel or an undo. */
+  let navAt = 0, guardOff = false;
+  const tooSoon = () => !guardOff && Date.now() - navAt < 400;
+  function go(view, opts){
+    const push = !opts || opts.push !== false;
+    S.view = view; S.mail = null; navAt = Date.now();
+    const n = S.active, t = n && S.tasks[n];
+    if (S.mode === 'session' && t && !t.end) {
+      t.path.push([view, secs(t.start)]);
+      if (TASKS[n].end === view) endTask(n, 'reached ' + view);
+    }
+    if (push) { try { history.pushState({v:view}, '', '#' + view); } catch (e) {} }
+    save(); render(); window.scrollTo(0, 0);
+  }
+  function resetTask(n){
+    if (n === 1) S.t1 = freshT1();
+    if (n === 3) S.t3 = freshT3();
+    if (n === 4) S.t4 = freshT4();
+    if (n === 5) S.t5 = freshT5();
+  }
+  function startTask(n){
+    if (S.active && S.active !== n) endTask(S.active, 'next task started');
+    if (S.active === n) endTask(n, 'restarted');
+    resetTask(n);
+    S.mode = 'session'; S.scenario = null; S.panel = false; S.confirmNew = false; S.mailSeen = [];
+    if (!Object.keys(S.tasks).length) S.runNo = S.sessionNo;
+    const prev = S.tasks[n];
+    const attempts = prev ? (prev.attempts || []).concat([{start:prev.start, end:prev.end, endReason:prev.endReason, path:prev.path, events:prev.events}]) : [];
+    S.tasks[n] = {start:Date.now(), end:null, endReason:'', success: prev ? prev.success : null, path:[], events:[], attempts};
+    S.active = n; S.lastTask = n;
+    go(TASKS[n].start);
+  }
+  function endTask(n, reason){
+    const t = S.tasks[n]; if (!t || t.end) return;
+    t.end = Date.now(); t.endReason = reason || 'ended by facilitator';
+    if (S.active === n) S.active = null;
+    save();
+  }
+  function tryScenario(n){
+    S.mode = 'explore'; S.active = null; S.scenario = n; S.mailSeen = []; resetTask(n); go(TASKS[n].start);
+  }
+  const ARCHIVE = 'swaphall-archive-v1';
+  let archive = (() => { try { const a = JSON.parse(localStorage.getItem(ARCHIVE) || '[]'); return Array.isArray(a) ? a : []; } catch (e) { return []; } })();
+  function archiveSession(){
+    if (!Object.keys(S.tasks).length) return;
+    archive = [summary()].concat(archive).slice(0, 15);
+    try { localStorage.setItem(ARCHIVE, JSON.stringify(archive)); } catch (e) { /* kept in memory */ }
+  }
+  function newSession(){
+    archiveSession();
+    const keepNo = S.sessionNo;
+    S = fresh(); S.sessionNo = keepNo; S.mode = 'session'; S.view = 'ready'; S.panel = true;
+    save(); render();
+  }
+
+  /* ---------- Shared pieces ---------- */
+  function appbar(){
+    const sub = S.mode === 'explore' ? 'Prototype' : 'IDEA9106';
+    return `<header class="appbar"><span class="logo" data-lp role="img" aria-label="Swap Hall">${LOGO}</span>
+      <span class="appname">Swap Hall<small>${sub}</small></span>
+      ${S.mode === 'explore' ? '<button class="appbar-link" data-act="about">Overview</button>' : ''}</header>`;
+  }
+  function shell(inner, back){
+    const banner = S.mode === 'explore' && S.scenario ? `<aside class="scenario" aria-label="Scenario"><b>Scenario</b>${esc(SCEN[S.scenario])}</aside>` : '';
+    const backBtn = back ? `<button class="back" data-act="go" data-arg="${back}" id="back-btn"><span aria-hidden="true">‹</span> Back</button>` : '';
+    return `<div class="site">${appbar()}${banner}<main class="screen">${backBtn}${inner}</main></div>`;
+  }
+  /* Tasks 2 and 5 start in the student's email. The newest email is from Swap Hall; its button opens the website. */
+  const MAIL_ICON = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>';
+  const MAILS = {
+    '2A': {clock:'Friday 6:00pm', list:[
+      {id:'new', from:'Swap Hall', subject:'Round 1 results are out', preview:'See which tutorial you got, and why.', time:'6:00pm', unread:true,
+       body:['Hi,', 'The Round 1 lottery results for IDEA9106 are out. See which tutorial you got, and why.'], btn:'See my result', to:'2B'},
+      {id:'old1', from:'Swap Hall', subject:'Your choices are in', preview:'Results come out on Friday at 6pm.', time:'Wed',
+       body:['Hi,', 'We got your Round 1 choices for IDEA9106. Results come out on Friday at 6pm, for everyone at the same time.']},
+      {id:'old2', from:'Mia', subject:'Our group code', preview:'Here’s the code for our IDEA9106 group: GRP-4821', time:'Tue', personal:true,
+       body:['Hey!', 'Here’s the code for our IDEA9106 group: GRP-4821. See you in class!', 'Mia']}]},
+    '5A': {clock:'Monday 9:05pm', list:[
+      {id:'new', from:'Swap Hall', subject:'9:00pm matching: no match this time', preview:'See why, and what you can do next.', time:'9:00pm', unread:true,
+       body:['Hi,', 'Your request wasn’t matched at 9:00pm. See why, and what you can do next.'], btn:'See details', to:'5B'},
+      {id:'old1', from:'Swap Hall', subject:'Request posted', preview:'Next matching: 9:00pm tonight.', time:'2:10pm',
+       body:['Hi,', 'Your request to move from T05 is posted. Next matching: 9:00pm tonight.', 'You keep your seat in T05 until a swap happens.']},
+      {id:'old2', from:'Student News', subject:'Week 1: what’s on', preview:'Clubs, events and study spaces this week.', time:'8:00am', personal:true,
+       body:['Clubs, events and study spaces this week.', 'Have a great first week!']}]}
+  };
+  function mailScreen(v){
+    const M = MAILS[v], open = M.list.find(m => m.id === S.mail) || null, seen = S.mailSeen || [];
+    const unread = m => m.unread && !seen.includes(`${v}:${m.id}`);
+    const n = M.list.filter(unread).length;
+    const rows = M.list.map(m => `<li><button class="mailrow${unread(m) ? ' unread' : ''}" id="mail-${m.id}" data-act="mail" data-arg="${m.id}"${open === m ? ' aria-current="true"' : ''}>
+        <span class="m-dot" aria-hidden="true"></span><span class="m-from">${unread(m) ? '<span class="sr-only">Unread: </span>' : ''}${esc(m.from)}</span><span class="m-time">${m.time}</span>
+        <span class="m-subj">${esc(m.subject)}</span><span class="m-prev">${esc(m.preview)}</span></button></li>`).join('');
+    const reader = open
+      ? `<article class="reader" aria-labelledby="msg-title"><button class="back" data-act="closemail" id="mail-back"><span aria-hidden="true">‹</span> Inbox</button>
+          <header class="msg-head"><h2 id="msg-title">${esc(open.subject)}</h2><p class="msg-meta">From ${esc(open.from)} · ${open.time}</p></header>
+          <div class="msg-body">${open.personal ? '' : `<p class="msg-brand"><span class="logo" aria-hidden="true">${LOGO}</span>Swap Hall</p>`}
+            ${open.body.map(t => `<p>${esc(t)}</p>`).join('')}
+            ${open.btn ? `<button class="btn" data-act="go" data-arg="${open.to}" id="mail-link">${open.btn}</button>` : ''}</div></article>`
+      : '<div class="reader"><p class="reader-empty">Select an email to read it.</p></div>';
+    const banner = S.mode === 'explore' && S.scenario ? `<aside class="scenario" aria-label="Scenario"><b>Scenario</b>${esc(SCEN[S.scenario])}</aside>` : '';
+    return `<div class="mail"><header class="mailbar"><span class="mailicon" data-lp role="img" aria-label="Mail">${MAIL_ICON}</span>
+        <span class="mailname">Mail<small>Student email</small></span><span class="mailclock">${M.clock}</span>
+        ${S.mode === 'explore' ? '<button class="appbar-link" data-act="about">Overview</button>' : ''}</header>${banner}
+      <main class="mailmain${open ? ' is-open' : ''}"><section class="inboxpane" aria-labelledby="inbox-title">
+        <div class="inbox-head"><h1 id="inbox-title">Inbox</h1><span class="small">${n ? `${n} unread` : 'No unread email'}</span></div>
+        <ul class="inbox">${rows}</ul></section>${reader}</main></div>`;
+  }
+  function hallBoard(me, group){
+    const rows = T.map(t => `<tr class="${t.id === me ? 'me' : ''}${t.id === group ? ' grp' : ''}">
+      <th scope="row"><span class="mono">${t.id}</span>${t.id === me ? '<span class="tag">You</span>' : ''}${t.id === group ? '<span class="tag tag-grp">Your group</span>' : ''}<span class="tsub">${t.day} ${t.time}</span></th>
+      <td>${t.wantIn}</td><td>${t.wantOut}</td><td>${t.free}</td></tr>`).join('');
+    return `<div class="board-wrap"><table class="board"><caption>Requests right now</caption>
+      <thead><tr><th scope="col">Tutorial</th><th scope="col">Want in</th><th scope="col">Want out</th><th scope="col">Free seats</th></tr></thead>
+      <tbody>${rows}</tbody></table></div>`;
+  }
+  const keepSeat = 'You keep your seat until a swap happens. If you’re matched, you move automatically. Until then, you can cancel at any time.';
+
+  /* ---------- Screens ---------- */
+  const SCREENS = {};
+
+  SCREENS.ready = () => `<div class="site">${appbar()}<main class="screen ready">
+      <p class="eyebrow">Swap Hall prototype</p><h1 class="title">Ready</h1><p class="small">Waiting for the next task.</p></main></div>`;
+
+  SCREENS['1A'] = () => shell(`
+    <p class="eyebrow">IDEA9106 · Round 1</p>
+    <h1 class="title">Choose your tutorial</h1>
+    <p class="pill">Open until Friday 5pm</p>
+    <p><strong>Round 1 is a lottery:</strong> when a tutorial has more applicants than seats, a random draw decides. Applying early doesn’t change your chances.</p>
+    <p>Results: <strong>Friday 6pm</strong>, for everyone at the same time.</p>
+    <button class="link-btn" data-act="lottery" id="how-1a">How the lottery works</button>
+    <ul class="tlist">${T.map(t => {
+      const pct = Math.min(100, Math.round(t.applied / t.seats * 100));
+      return `<li class="tcard"><div class="tcard-head"><span class="tcode">${t.id}</span><span class="twhen">${t.dayName} ${t.time}</span></div>
+        <div class="tmeta">Tutor: ${t.tutor} · ${t.room}</div><div class="tintro">${t.intro}</div>
+        <div class="demand"><div class="bar${t.applied > t.seats ? ' over' : ''}" aria-hidden="true"><span style="width:${pct}%"></span></div>
+        <span class="dnum">${t.applied} applied / ${t.seats} seats</span></div></li>`; }).join('')}</ul>
+    <div class="actions sticky"><button class="btn" data-act="go" data-arg="1B" id="apply-btn">Apply</button></div>`);
+
+  SCREENS['1B'] = () => shell(`
+    <h1 class="title">Applying with friends?</h1>
+    <p>Enter your friend’s group code. Your group shares one lottery ticket: you all get the same tutorial, or try your next choice together.</p>
+    <form class="field" data-form="code" novalidate>
+      <label for="code">Group code</label>
+      <input id="code" name="code" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="GRP-0000" value="${esc(S.t1.code)}">
+      ${S.t1.codeErr ? `<p class="err" role="alert">${esc(S.t1.codeErr)}</p>` : ''}
+      <button class="btn" type="submit" id="join-btn">Join group</button>
+    </form>
+    <button class="btn btn-quiet" data-act="solo" id="solo-btn">Apply on my own</button>`, '1A');
+
+  SCREENS['1C'] = () => {
+    const t1 = S.t1;
+    const banner = t1.joined
+      ? `<div class="group-banner"><strong>You’re in Mia’s group</strong><span>${GROUP_CODE} · 2 members so far (up&nbsp;to&nbsp;5)</span>
+          <ul class="members"><li>Mia · <span class="ok">submitted</span></li><li>You · choosing</li></ul></div>`
+      : `<div class="group-banner solo"><strong>Applying on your own</strong><button class="link-btn" data-act="go" data-arg="1B">Join a group instead</button></div>`;
+    const rows = T.map(t => {
+      const locked = t1.cantDays.includes(t.day);
+      const m = locked ? 'cant' : (t1.marks[t.id] || null);
+      const b = (kind, label) => `<button id="mark-${t.id}-${kind}" data-kind="${kind}" aria-pressed="${m === kind}" data-act="mark" data-arg="${t.id}:${kind}"${locked ? ' disabled' : ''}>${label}</button>`;
+      return `<li class="mrow"><div class="mrow-head"><span class="tcode">${t.id}</span><span>${t.day} ${t.time} · ${t.tutor}</span></div>
+        <div class="seg" role="group" aria-label="${t.id} choice">${b('first','First choice')}${b('ok','OK')}${b('cant','Can’t')}</div>
+        ${locked ? `<p class="note">You can’t do ${t.dayName}s, so this is marked Can’t.</p>` : ''}</li>`;
+    }).join('');
+    return shell(`
+      ${banner}
+      <h1 class="title">Your choices</h1>
+      <p>Pick one <strong>First choice</strong>. Mark the others <strong>OK</strong> or <strong>Can’t</strong>. ${t1.joined ? 'Your group never goes to a tutorial that anyone in it marked Can’t.' : 'You never get a tutorial you marked Can’t.'}</p>
+      <ul class="mlist">${rows}</ul>
+      <section class="field"><h2 class="h3">Days I can’t do</h2>
+        <div class="chips">${DAYS.map(d => `<button class="chip" id="day-${d}" aria-pressed="${t1.cantDays.includes(d)}" data-act="cantday" data-arg="${d}">${d}</button>`).join('')}</div>
+        <p class="note">Tutorials you leave blank are only used if none of your choices work out.</p></section>
+      <div class="actions sticky">${t1.err ? `<p class="err" role="alert">${esc(t1.err)}</p>` : ''}<button class="btn" data-act="submit1" id="submit1">Submit choices</button></div>`, '1B');
+  };
+
+  SCREENS['1D'] = () => {
+    const t1 = S.t1;
+    const markOf = t => t1.cantDays.includes(t.day) ? 'cant' : t1.marks[t.id];
+    const list = kind => T.filter(t => markOf(t) === kind).map(t => tLabel(t.id)).join(', ') || 'None';
+    return shell(`
+      <div class="done"><span class="done-mark" aria-hidden="true">✓</span><h1 class="title">Your choices are in</h1></div>
+      <dl class="summary">
+        <div><dt>First choice</dt><dd>${list('first')}</dd></div>
+        <div><dt>OK</dt><dd>${list('ok')}</dd></div>
+        <div><dt>Can’t</dt><dd>${list('cant')}</dd></div>
+        <div><dt>Group</dt><dd>${t1.joined ? `Mia’s group (${GROUP_CODE})` : 'Applying on your own'}</dd></div>
+      </dl>
+      ${t1.joined ? '<p class="callout good">Mia has submitted too. Your group has one lottery ticket.</p>' : ''}
+      <p>The draw tries your <strong>First choice</strong> first, then your <strong>OK</strong> tutorials.</p>
+      <p>Results: <strong>Friday 6pm</strong>, for everyone at the same time.</p>
+      <button class="link-btn" data-act="go" data-arg="1C" id="edit-choices">Change my choices (open until Friday 5pm)</button>`);
+  };
+
+  SCREENS['2A'] = () => mailScreen('2A');
+
+  SCREENS['2B'] = () => shell(`
+    <p class="eyebrow" aria-hidden="true">Round 1 result</p><h1 class="sr-only">Round 1 result</h1>
+    <div class="ticket"><div class="ticket-main"><span class="tcode">T02</span><span class="twhen">Tuesday 3:00pm</span><span>Tutor: Sam · Room 2.12</span></div>
+      <div class="ticket-stub">You and Mia are in the same tutorial.</div></div>
+    <section class="field"><h2 class="h2">Why not T03?</h2>
+      <p>T03 was your first choice. It had <strong>62 applicants for 20 seats</strong>. Your group’s ticket wasn’t drawn, so the lottery tried your next choice, T02, and you both got in.</p>
+      <button class="link-btn" data-act="lottery" id="how-btn">How the lottery works</button></section>
+    <p class="callout">Still want T03? From week 0 until Friday of week 2, you can post a request in the Swap Hall. You keep your T02 seat while you wait.</p>`);
+
+  SCREENS['2C'] = () => shell(`
+    <h1 class="title">How the lottery works</h1>
+    <ol class="steps">
+      <li><strong>One ticket per group.</strong> If you apply with friends, you share one ticket: you all get the same tutorial, or you all try your next choice together.</li>
+      <li><strong>Some students go first.</strong> Students with no tutorial or a timetable clash, then students with documented work, care or medical needs, then project teams with a confirmed group code, then everyone else.</li>
+      <li><strong>Then it’s a random draw.</strong> Applying early doesn’t help.</li>
+      <li><strong>Missed your first choice?</strong> You get an extra ticket next semester.</li>
+    </ol>`, S.lotteryBack || '2B');
+
+  function hallScreen(me, group, postTo){
+    const t = byId(me);
+    return shell(`
+      <p class="eyebrow" aria-hidden="true">Swap Hall · Week 1, Monday</p><h1 class="sr-only">Swap Hall, week 1, Monday</h1>
+      <div class="mine"><span>Your tutorial</span><strong>${t.id} · ${t.dayName} ${t.time} · ${t.tutor}</strong>
+        ${group ? `<span>Your group: 4 members in ${group}</span>` : ''}</div>
+      <div class="clock">
+        <div><span>Next matching</span><strong>Today 9:00pm</strong><span>then 7:00am</span></div>
+        <div><span>Hall closes</span><strong>Fri of week 2</strong><span>9:00pm · 18 matchings left</span></div></div>
+      <p class="small">At each matching, everyone who can swap moves at the same moment, so nobody has to give up a seat first.</p>
+      ${hallBoard(me, group)}
+      <p class="small">Requests are anonymous. You only see numbers.</p>
+      <button class="link-btn" data-act="numbers" id="numbers-btn">What do these numbers mean?</button>
+      <div class="actions"><button class="btn" data-act="go" data-arg="${postTo}" id="post-btn">Post a request</button></div>`);
+  }
+  SCREENS['3A'] = () => hallScreen('T03', null, '3B');
+  SCREENS['4A'] = () => hallScreen('T05', 'T03', '4C');
+
+  SCREENS['3B'] = () => {
+    const t3 = S.t3, ok = fits(t3.cant, 'T03');
+    const dest = t3.anyFit ? ok : t3.dest;
+    const grid = `<table class="cantgrid"><thead><tr><th scope="col"><span class="small">Day</span></th>${PARTS.map(p => `<th scope="col">${p[1]}<small>${p[2]}</small></th>`).join('')}</tr></thead><tbody>
+      ${DAYS.map(d => `<tr><th scope="row">${d}</th>${PARTS.map(p => { const k = `${d}-${p[0]}`, on = t3.cant.includes(k);
+        return `<td><button id="cant-${k}" aria-pressed="${on}" aria-label="${d} ${p[1].toLowerCase()}" data-act="cant" data-arg="${k}">${on ? 'Busy' : ''}</button></td>`; }).join('')}</tr>`).join('')}
+      </tbody></table>`;
+    const chips = ['T01','T02','T04','T05'].map(id => { const t = byId(id), clash = !ok.includes(id), auto = t3.anyFit && !clash;
+      return `<button class="chip${clash ? ' clash' : ''}${auto ? ' auto' : ''}" id="dest-${id}" aria-pressed="${dest.includes(id)}" data-act="dest" data-arg="${id}"${clash ? ' disabled' : ''}${auto ? ' aria-disabled="true"' : ''}>${id}<small>${clash ? 'clashes with your times' : `${t.day} ${t.time}`}</small></button>`; }).join('');
+    return shell(`
+      <h1 class="title">Post a request</h1>
+      <div class="mine"><span>Moving from</span><strong>T03 · Wednesday 2:00pm</strong></div>
+      <section class="field"><h2 class="h3">Times you can’t do</h2><p class="small">Select the times you’re busy, for example at work.</p>
+        <div class="grid-wrap">${grid}</div></section>
+      <section class="field"><h2 class="h3">Tutorials you could move to</h2>
+        <label class="switch" for="anyfit"><input type="checkbox" id="anyfit"${t3.anyFit ? ' checked' : ''}><span>Any tutorial that fits my times</span></label>
+        <div class="chips">${chips}</div>
+        ${t3.anyFit ? '<p class="note">Every tutorial that fits your times is included.</p>' : ''}</section>
+      <div class="actions sticky">${t3.err ? `<p class="err" role="alert">${esc(t3.err)}</p>` : ''}<button class="btn" data-act="review3" id="review3">Review request</button></div>`, '3A');
+  };
+
+  SCREENS['3C'] = () => {
+    const t3 = S.t3;
+    const busy = t3.cant.map(k => { const [d, p] = k.split('-'); return `${d} ${p}`; }).join(', ');
+    return shell(`
+      <h1 class="title">Check your request</h1>
+      <div class="req"><div><span>From</span><strong>T03</strong><span>Wed 2:00pm</span></div><div class="req-arrow" aria-hidden="true">→</div>
+        <div><span>Move to any of</span><strong>${t3.final.join(', ')}</strong></div></div>
+      ${busy ? `<p class="small">Times you can’t do: ${busy}</p>` : ''}
+      <div class="callout good"><p>${keepSeat}</p></div>
+      <div class="actions"><button class="btn" data-act="post3" id="post3">Post request</button></div>`, '3B');
+  };
+
+  /* "Request posted" (3D, 4D). After a cancel the screen says so plainly and offers Undo, like 5B. */
+  function postedScreen(from, to, cancelled, n){
+    return shell(`
+      <div class="done"><span class="done-mark${cancelled ? ' off' : ''}" aria-hidden="true">${cancelled ? '–' : '✓'}</span><h1 class="title">${cancelled ? 'Request cancelled' : 'Request posted'}</h1></div>
+      <p>${cancelled
+        ? `You’re staying in ${from}. You can post a new request any time before the hall closes on Friday of week 2.`
+        : `Next matching: <strong>9:00pm</strong> tonight. You stay in ${from} until a swap happens. Your request stays open until the hall closes on Friday of week 2, unless you cancel it.`}</p>
+      <div class="myreq"><h2 class="h3">My requests</h2>
+        <div class="myreq-row"><span class="mono">${from} → ${to}</span><span class="status${cancelled ? ' off' : ''}">${cancelled ? 'Cancelled' : 'Waiting for 9:00pm'}</span></div>
+        ${cancelled
+          ? `<button class="btn btn-quiet" data-act="undo${n}" id="undo${n}">Undo</button>`
+          : `<button class="btn btn-quiet" data-act="cancel${n}" id="cancel${n}">Cancel request</button>`}</div>`);
+  }
+  SCREENS['3D'] = () => postedScreen('T03', S.t3.final.join(', '), S.t3.cancelled, 3);
+
+  SCREENS['4B'] = () => shell(`
+    <h1 class="title">What the numbers mean</h1>
+    <dl class="defs">
+      <div><dt>Want in</dt><dd>Students who asked to move into this tutorial.</dd></div>
+      <div><dt>Want out</dt><dd>Students who asked to leave it.</dd></div>
+      <div><dt>Free seats</dt><dd>Empty seats right now.</dd></div>
+    </dl>
+    <p>Your chance depends on how many people want out, compared with how many want in. Matching happens at fixed times, and a seat that frees up is held until then, so nobody can grab it first.</p>`, S.numbersBack || '4A');
+
+  SCREENS['4C'] = () => {
+    const t4 = S.t4;
+    const chips = ['T01','T02','T04'].map(id => { const t = byId(id);
+      return `<button class="chip" id="extra-${id}" aria-pressed="${t4.extra.includes(id)}" data-act="extra" data-arg="${id}">${id}<small>${t.day} ${t.time}</small></button>`; }).join('');
+    return shell(`
+      <h1 class="title">Post a request</h1>
+      <div class="req"><div><span>From</span><strong>T05</strong><span>Fri 9:00am</span></div><div class="req-arrow" aria-hidden="true">→</div>
+        <div><span>Move to</span><strong>${['T03'].concat(t4.extra).join(', ')}</strong><span>${t4.extra.length ? 'any of these' : 'Wed 2:00pm, with your group'}</span></div></div>
+      <section class="field"><h2 class="h3">Add other tutorials (optional)</h2><div class="chips">${chips}</div></section>
+      <div class="callout good"><p>${keepSeat}</p></div>
+      <div class="actions"><button class="btn" data-act="post4" id="post4">Post request</button></div>`, '4A');
+  };
+
+  SCREENS['4D'] = () => postedScreen('T05', ['T03'].concat(S.t4.extra).join(', '), S.t4.cancelled, 4);
+
+  SCREENS['5A'] = () => mailScreen('5A');
+
+  SCREENS['5B'] = () => {
+    const t5 = S.t5;
+    const base = ['T03'].concat(S.t4.posted && !S.t4.cancelled ? S.t4.extra : []);
+    const req = base.concat(t5.saved ? t5.added.filter(id => !base.includes(id)) : []);
+    const addable = ['T01','T02','T04'].filter(id => !base.includes(id));
+    const opt = (k, label) => `<button class="opt" id="opt-${k}" aria-pressed="${t5.choice === k}" data-act="t5" data-arg="${k}">${label}</button>`;
+    let more = '';
+    if (t5.choice === 'keep') more = '<p class="callout">Your request stays for the 7:00am matching, with one extra ticket.</p>';
+    if (t5.choice === 'add') more = t5.saved
+      ? `<p class="callout">Saved. Your request now covers ${req.join(', ')}.</p>`
+      : !addable.length ? '<p class="callout">Every other tutorial is already in your request.</p>'
+      : `<div class="callout"><p>Add tutorials you could also go to:</p><div class="chips">${addable.map(id => `<button class="chip" id="add-${id}" aria-pressed="${t5.added.includes(id)}" data-act="add5" data-arg="${id}">${id}<small>${byId(id).day} ${byId(id).time}</small></button>`).join('')}</div>
+         <div class="inline-row"><button class="btn small" data-act="save5" id="save5">Save</button></div></div>`;
+    if (t5.choice === 'group') more = t5.groupSent
+      ? '<p class="callout">Sent to your group. Nothing changes until every member agrees.</p>'
+      : `<div class="callout"><p>Your group could ask to move all 5 of you to one tutorial together. You all move at the same matching, or nobody moves. Every member has to agree first.</p>
+         <div class="inline-row"><button class="btn small" data-act="sendgroup" id="sendgroup">Send to my group</button></div></div>`;
+    if (t5.choice === 'cancel' && !t5.cancelled) more = `<div class="callout"><p>Cancel your request? You’ll stay in T05.</p>
+         <div class="inline-row"><button class="btn small" data-act="cancel5" id="cancel5">Cancel request</button><button class="btn btn-quiet small" data-act="t5" data-arg="keep" id="keep5">Keep it</button></div></div>`;
+    return shell(`
+      <p class="eyebrow">My request</p>
+      <h1 class="title mono">T05 → ${req.join(', ')}</h1>
+      <p class="pill warn">${t5.cancelled ? 'Cancelled' : 'No match at 9:00pm'}</p>
+      <p>A place opened in T03 today and <strong>30 people</strong> asked for it. At 9:00pm it went to another student by lottery.</p>
+      <dl class="summary">
+        <div><dt>You’re in</dt><dd>T05 · Friday 9:00am</dd></div>
+        <div><dt>Your request</dt><dd>${t5.cancelled ? 'Cancelled' : 'Still active, with one extra ticket next time'}</dd></div>
+        ${t5.cancelled ? '' : '<div><dt>Next matching</dt><dd>7:00am tomorrow</dd></div><div><dt>Hall closes</dt><dd>Friday of week 2, 9:00pm · 17 matchings left</dd></div>'}
+      </dl>
+      ${t5.cancelled
+        ? `<p class="callout">Request cancelled. You’re staying in T05.</p><div class="inline-row"><button class="btn btn-quiet small" data-act="undo5" id="undo5">Undo</button></div>`
+        : `<h2 class="h3">What would you like to do?</h2>
+      <div class="optlist">${opt('keep','Keep waiting')}${opt('add','Add more tutorials')}${opt('group','Ask my group to move together')}${opt('cancel','Cancel request')}</div>
+      ${more}`}`);
+  };
+
+  /* ---------- Overview page ---------- */
+  SCREENS.about = () => `<main class="about">
+    <div class="about-top"><span class="brand"><span class="logo" data-lp role="img" aria-label="Swap Hall">${LOGO}</span>Swap Hall</span></div>
+    <section class="hero">
+      <p class="eyebrow">IDEA9106 Design Thinking · student concept</p>
+      <h1>Swap Hall</h1>
+      <p class="lede">Change tutorials without waiting in the dark.</p>
+      <p>A new way for USyd students to choose and change tutorials, as a new part of the timetable website they already use. It is designed for students who must move because of their study group or a part-time job.</p>
+      <div class="cta"><a class="btn" href="#try" data-act="scrolltry">Try the prototype</a></div>
+    </section>
+
+    <section class="section"><h2>Why the wait never ends</h2>
+      <div class="cards3">
+        <div class="plain"><h3>The heart is silent</h3><p>You can’t see your position, how many people are waiting, or whether you’ll get in.</p></div>
+        <div class="plain"><h3>Nobody lets go first</h3><p>Students who want to swap all wait for someone else to leave a full class, so nobody moves.</p></div>
+        <div class="plain"><h3>It can’t see your life</h3><p>The system knows when two classes clash. It doesn’t know your group is in T03 or that you work on Wednesday afternoons.</p></div>
+      </div></section>
+
+    <section class="section"><h2>How it works</h2>
+      <div class="rounds">
+        <div class="round"><p class="eyebrow">Round 1 · before semester</p><h3>One fair lottery</h3><ul>
+          <li>See each tutorial’s tutor, time, room, and how many students applied for its seats.</li>
+          <li>Mark tutorials First choice, OK or Can’t, and add times you can’t do.</li>
+          <li>Join friends with a group code. One ticket per group: you all get in together, or try the next choice together.</li>
+          <li>Everyone gets results at the same time, with a one-line reason. An email tells you when they’re out.</li></ul></div>
+        <div class="round"><p class="eyebrow">Round 2 · weeks 0–2</p><h3>The Swap Hall</h3><ul>
+          <li>Post a request any time: “T05 → T03”, or “leave Wednesday afternoon, any tutorial that fits”.</li>
+          <li>Matching runs at fixed times outside class hours. You don’t need to be online: the result comes by email.</li>
+          <li>Swaps happen at the same moment. You keep your seat until you get the new one.</li>
+          <li>A seat that frees up in a full tutorial is held until the next matching, so nobody can grab it first.</li>
+          <li>Tutorials with free seats work as usual: join or leave any time.</li></ul></div>
+        <div class="round"><p class="eyebrow">Close · Friday of week 2</p><h3>Lists freeze</h3><ul>
+          <li>The last matching is at 9:00pm on Friday of week 2, in line with the University’s week-2 deadline for timetable changes.</li>
+          <li>The same date for every unit of study. In IDEA9106, friends who want to be in one team get into the same tutorial in Round 1 or in weeks 0–2, before teams form in week 3.</li>
+          <li>After that, special cases go to the coordinator, as now. The coordinator also gets a demand report, and students who missed their first choice get an extra ticket next semester.</li></ul></div>
+      </div></section>
+
+    <section class="section"><h2>What happens at a matching</h2>
+      <p>Two students each hold the seat the other wants. With the heart, both wait for someone to drop out first. In the Swap Hall, they post their requests and move at the same moment.</p>
+      <div class="swapdemo">
+        <div class="sd-card"><p class="eyebrow">Before 9:00pm</p>
+          <div class="sd-row"><span class="sd-who">Ana</span><span class="sd-seat">T03</span><span class="sd-want">wants T05</span></div>
+          <div class="sd-row"><span class="sd-who">Ben</span><span class="sd-seat">T05</span><span class="sd-want">wants T03</span></div>
+          <p class="small">Both keep their seats while they wait.</p></div>
+        <div class="sd-arrow" aria-hidden="true">→</div>
+        <div class="sd-card"><p class="eyebrow">At 9:00pm</p>
+          <div class="sd-row"><span class="sd-who">Ana</span><span class="sd-seat sd-new">T05</span><span class="sd-want">moved</span></div>
+          <div class="sd-row"><span class="sd-who">Ben</span><span class="sd-seat sd-new">T03</span><span class="sd-want">moved</span></div>
+          <p class="small">Nobody gave up a seat first. A loop of three works the same way.</p></div>
+      </div></section>
+
+    <section class="section"><h2>Matching gets less frequent as lists settle</h2>
+      <ol class="timeline">
+        <li class="stage"><h3>Before semester</h3><p><strong>Round 1 lottery.</strong> Results for everyone at the same time.</p></li>
+        <li class="stage"><h3>Weeks 0–1</h3><p><strong>7:00am and 9:00pm</strong> every day. Most requests come in now.</p><div class="dots" aria-hidden="true">${'<i></i>'.repeat(28)}</div></li>
+        <li class="stage"><h3>Week 2</h3><p><strong>9:00pm</strong> every day. The hall closes after the Friday 9:00pm matching.</p><div class="dots" aria-hidden="true">${'<i></i>'.repeat(5)}</div></li>
+        <li class="stage"><h3>After close</h3><p><strong>Lists frozen.</strong> Demand report to the coordinator.</p></li>
+      </ol>
+      <p class="small">Each dot is one matching time. In weeks 0–1, the top row is 7:00am and the bottom row is 9:00pm.</p></section>
+
+    <section class="section"><h2>Who goes first</h2>
+      <ol class="tiers">
+        <li>Students with no tutorial, or a clash the system can see. Leaving your own tutorial or creating your own clash doesn’t count.</li>
+        <li>Students with documented work, care or medical needs, using the University’s existing evidence.</li>
+        <li>Project teams that must share a tutorial, once every member confirms the group code.</li>
+        <li>Everyone else.</li></ol>
+      <p>Within each level it’s a random draw. Every matching you wait adds a ticket.</p></section>
+
+    <section class="section"><h2>Where the wait goes</h2>
+      <ul class="moves">
+        <li>From not knowing how long, to known times each day.</li>
+        <li>A freed seat in a full tutorial waits up to a day before it’s given out.</li>
+        <li>Students who only want a different tutor or time wait behind students who must move.</li>
+        <li>Demand that can’t be met becomes a report for the coordinator and an extra ticket next semester.</li></ul></section>
+
+    <section class="section" id="try"><h2>Try the prototype</h2>
+      <p>Each scenario opens on the screen where its task starts. All names and numbers are made up.</p>
+      <div class="try">
+        ${[1,2,3,4,5].map(n => `<div class="trycard"><p class="eyebrow">${['','Round 1','Round 1','Swap Hall','Swap Hall','Swap Hall'][n]}</p><h3 class="h2">${['','Apply with a friend','See your result','Leave a class for work','Decide whether to wait','Check a 9pm result'][n]}</h3><p>${esc(SCEN[n])}</p><button class="btn small" data-act="try" data-arg="${n}" id="try-${n}">Open</button></div>`).join('')}
+      </div></section>
+
+    <footer class="foot">
+      <p>A student design prototype for IDEA9106 Design Thinking at the University of Sydney. Tutorials, people and numbers are made up. This is not a University system.</p>
+      <p>Built with AI help (Claude) for a student project.</p>
+    </footer></main>`;
+
+  /* ---------- Facilitator panel ---------- */
+  function summary(){
+    const lines = [`Swap Hall test · Session ${S.runNo || S.sessionNo} · ${new Date().toLocaleString()}`];
+    [1,2,3,4,5].forEach(n => {
+      const t = S.tasks[n];
+      if (!t) { lines.push(`Task ${n}: not run`); return; }
+      const dur = fmt((t.end || Date.now()) - t.start);
+      const tries = t.attempts || [];
+      lines.push(`Task ${n}: ${t.end ? 'done' : 'running'} ${dur} · success ${t.success === null || t.success === undefined ? '-' : t.success}${t.endReason ? ' · ' + t.endReason : ''}${tries.length ? ` · attempt ${tries.length + 1}` : ''}`);
+      lines.push(`  path: ${t.path.map(p => p[0]).join(' > ') || '-'}`);
+      if (t.events.length) lines.push(`  notes: ${t.events.map(e => `${e[0]} (${e[1]}s)`).join('; ')}`);
+      tries.forEach((a, i) => lines.push(`  earlier attempt ${i + 1}: ${fmt((a.end || a.start) - a.start)} · ${a.endReason || '-'} · path ${a.path.map(p => p[0]).join(' > ') || '-'}${a.events.length ? ' · notes ' + a.events.map(e => `${e[0]} (${e[1]}s)`).join('; ') : ''}`));
+    });
+    return lines.join('\n');
+  }
+  function taskRow(n){
+    const k = TASKS[n], t = S.tasks[n];
+    const status = !t ? 'Not started'
+      : t.end ? `Done · ${fmt(t.end - t.start)} · ${esc(t.endReason)}`
+      : `Running · <span data-timer="${n}">${fmt(Date.now() - t.start)}</span>`;
+    return `<div class="ptask${S.active === n ? ' is-active' : ''}">
+      <div class="ptask-head"><strong>Task ${n}</strong><span>${esc(k.name)}</span></div>
+      <p class="pstatus">${status}</p>
+      <div class="prow">
+        <button class="btn${t ? ' btn-quiet' : ''} small" data-act="start" data-arg="${n}" id="start-${n}">${t ? 'Restart' : 'Start'}</button>
+        ${t && !t.end ? `<button class="btn btn-quiet small" data-act="end" data-arg="${n}" id="end-${n}">End task</button>` : ''}
+        <span class="score" role="group" aria-label="Task ${n} success"><span>Success</span>${[0,1,2].map(v => `<button id="score-${n}-${v}" aria-pressed="${!!t && t.success === v}" data-act="score" data-arg="${n}:${v}"${t ? '' : ' disabled'}>${v}</button>`).join('')}</span>
+      </div>
+      <details><summary>Card and notes</summary>
+        ${k.before ? `<p class="say small">${esc(k.before)}</p>` : ''}
+        <p class="say"><b>Say first:</b> “${esc(k.say)}”</p>
+        <p class="cardtext">${esc(k.card)}</p>
+        <p class="small"><b>2 =</b> ${esc(k.success)}</p>
+        ${k.after ? `<p class="small"><b>After:</b> ${esc(k.after)}</p>` : ''}
+        <p class="small">${esc(k.timer)}</p>
+      </details></div>`;
+  }
+  function quickBar(){
+    const a = S.active, t = a && S.tasks[a];
+    const next = [1,2,3,4,5].find(n => n > (S.lastTask || 0) && !S.tasks[n]);
+    let html = '';
+    if (t && !t.end) html += `<div class="prow"><span class="pstatus">Task ${a} running · <span data-timer="${a}">${fmt(Date.now() - t.start)}</span></span><button class="btn btn-quiet small" data-act="end" data-arg="${a}" id="quick-end">End Task ${a}</button></div>`;
+    html += next
+      ? `<button class="btn" data-act="start" data-arg="${next}" id="quick-start">Start Task ${next} · ${esc(TASKS[next].name)}</button>`
+      : '<p class="small">No more tasks to start. Score them below, then Copy results.</p>';
+    return `<section class="psec quick"><h3>Next</h3>${html}</section>`;
+  }
+  function panel(){
+    const opts = ['1','2','3','4','5','Practice'].map(v => `<option value="${v}"${S.sessionNo === v ? ' selected' : ''}>${v === 'Practice' ? 'Practice' : 'Session ' + v}</option>`).join('');
+    return `<div class="panel" role="dialog" aria-modal="true" aria-labelledby="ptitle"><div class="panel-inner">
+      <div class="panel-head"><div><h2 id="ptitle">Facilitator panel</h2><p class="small">For the test team only. Participants should not see this.</p></div>
+        <button class="btn btn-quiet small" data-act="closepanel" id="close-panel">Close</button></div>
+      ${quickBar()}
+      <section class="psec"><h3>Session</h3>
+        <div class="prow"><label for="sess">Session</label><select id="sess">${opts}</select>
+          <button class="btn small" data-act="newsession" id="new-session">New session</button></div>
+        ${S.confirmNew ? `<div class="confirm">Clear this session’s results and start again? <button class="btn small" data-act="newsession-yes" id="new-yes">Yes, clear</button><button class="btn btn-quiet small" data-act="newsession-no" id="new-no">No</button></div>` : ''}
+        <p class="small">Choose the session, then press New session: you get a blank Ready screen, and the old results move to Earlier sessions below, under their own session number. Use the blue Start button at the top for the next task, then turn the laptop (or hand the phone) back to the participant. Tasks 1 and 3 stop their timer when the participant finishes. Task 4 stops when they post a request; if they don’t, press End task, as for tasks 2 and 5. Restart keeps the earlier attempt in the results.</p></section>
+      <section class="psec"><h3>Tasks</h3>${[1,2,3,4,5].map(taskRow).join('')}</section>
+      <section class="psec"><h3>Results</h3>
+        <textarea id="summary" readonly rows="9" aria-label="Session results">${esc(summary())}</textarea>
+        <div class="prow"><button class="btn small" data-act="copy" data-arg="summary" id="copy-btn">Copy results</button><span id="copied" class="small" aria-live="polite"></span></div></section>
+      ${archive.length ? `<section class="psec"><details><summary>Earlier sessions (${archive.length})</summary>
+        <p class="small">Saved automatically each time you press New session.</p>
+        <textarea id="archive" readonly rows="8" aria-label="Earlier sessions">${esc(archive.join('\n\n'))}</textarea>
+        <div class="prow"><button class="btn btn-quiet small" data-act="copy" data-arg="archive" id="copy-archive">Copy all</button><span id="copied-archive" class="small" aria-live="polite"></span></div></details></section>` : ''}
+      <section class="psec"><h3>Script</h3>
+        <details class="script"><summary>Intro and consent</summary>
+          <p>“Hi, thanks for joining in today. My name is ___.”</p>
+          <p>“We’re testing a prototype to understand whether a new way of choosing and changing tutorials is easy to use and feels fair. It’s called Swap Hall.”</p>
+          <p>“We’re testing the prototype, not you. There are no right or wrong answers.”</p>
+          <p>“As you go through the tasks, please say what you’re thinking: what you expect, what confuses you, and what you like.”</p>
+          <p>“This is a rough prototype of a new part of the uni’s timetable website, so not everything works. Just click as you normally would. Some parts, like the lottery and the matching, are run by my teammate behind the scenes.”</p>
+          <p>“Is it OK if we video-record this session? It’s only for our project. Please read and sign this consent form.”</p></details>
+        <details class="script"><summary>Before the tasks</summary><ol>
+          <li>“Have you ever tried to get into a full tutorial? What happened?”</li>
+          <li>“Have you ever wanted to be in the same tutorial as a friend or group member?”</li>
+          <li>“Do you have a part-time job or anything else that limits which tutorial times you can take?”</li>
+          <li>“At the moment, when a tutorial is full, you can click the heart to join its waitlist. Imagine the tutorial you want is full and you click the heart. How sure would you be about whether to keep waiting, from 1 (not sure at all) to 5 (very sure)? And how anxious would you feel, from 1 (not at all) to 5 (very)?”</li></ol>
+          <p>“I’ll give you five short tasks, one at a time. I’ll read each one out loud and give you the card. Please try to do it on your own, and keep telling us what you’re thinking.”</p></details>
+        <details class="script"><summary>Prompts</summary>
+          <p>“What are you thinking right now?” · “What do you expect to happen if you do that?” · “What are you looking for?”</p>
+          <p>Stuck for about a minute: “What would you try next?” Then one small hint; score that task 1.</p></details>
+        <details class="script"><summary>After the tasks</summary>
+          <p>“Thank you. Now please fill in this short questionnaire about the prototype you just used.” (SUS)</p><ol>
+          <li>“In Swap Hall, you keep your current seat until a swap actually happens. How likely would you be to post a swap request, from 1 (very unlikely) to 5 (very likely)? And if you had to give up your seat first, how likely would you be, from 1 to 5?”</li>
+          <li>“In Task 4, what did you look at to make your decision? Was anything confusing?”</li>
+          <li>“Compared with first-come-first-served, how fair is the group lottery, from 1 (much less fair) to 5 (much fairer)? 3 means about the same. Why?”</li>
+          <li>“What are 3 things you liked most, and 3 things you liked least?”</li>
+          <li>“In weeks 0 and 1, Swap Hall matches requests twice a day, at 7am and 9pm. In week 2 it’s only at 9pm, and the last matching is on Friday of week 2. Would those times work for you? Why?”</li>
+          <li>“Is there anything else you’d like to tell us?”</li></ol>
+          <p>“That’s everything. Thank you so much for your time. Your feedback will help us improve the design.”</p></details></section>
+      <section class="psec"><div class="prow">
+        <button class="btn btn-quiet small" data-act="readyscreen" id="ready-btn">Show Ready screen</button>
+        <button class="btn btn-quiet small" data-act="about" id="about-btn">Open overview page</button></div></section>
+    </div></div>`;
+  }
+
+  /* ---------- Render ---------- */
+  const app = document.getElementById('app');
+  let usingKeys = false;
+  document.addEventListener('keydown', () => { usingKeys = true; }, true);
+  document.addEventListener('pointerdown', () => { usingKeys = false; }, true);
+  let lastView = null;
+  function render(){
+    const focusId = usingKeys && document.activeElement && document.activeElement.id;
+    /* Keep the page's place (and the panel's) when the same screen redraws, e.g. after marking a tutorial. */
+    const same = S.view === lastView, pageY = same ? window.scrollY : 0;
+    const oldPanel = app.querySelector('.panel');
+    const panelTop = oldPanel && S.panel ? oldPanel.scrollTop : 0;
+    const screen = (SCREENS[S.view] || SCREENS.about)();
+    app.innerHTML = screen + (S.panel ? panel() : '');
+    /* While the panel is open, the screen behind it can't be reached with Tab or a screen reader. */
+    if (S.panel && app.firstElementChild) app.firstElementChild.inert = true;
+    lastView = S.view;
+    if (same && pageY && Math.abs(window.scrollY - pageY) > 1) window.scrollTo(0, pageY);
+    if (panelTop) { const pn = app.querySelector('.panel'); if (pn) pn.scrollTop = panelTop; }
+    document.body.style.overflow = S.panel ? 'hidden' : '';
+    if (focusId) { const el = document.getElementById(focusId); if (el) { try { el.focus({preventScroll:true}); } catch (e) { el.focus(); } } }
+  }
+  function openPanel(){ S.panel = true; S.confirmNew = false; save(); render(); }
+  function closePanel(){ S.panel = false; S.confirmNew = false; save(); render(); }
+
+  /* ---------- Events ---------- */
+  document.addEventListener('click', e => {
+    const el = e.target.closest('[data-act]'); if (!el || el.disabled) return;
+    if (tooSoon() && !el.closest('.panel')) { e.preventDefault(); return; }
+    const act = el.dataset.act, arg = el.dataset.arg;
+    switch (act) {
+      case 'go': go(arg); break;
+      case 'about': S.panel = false; S.view = 'about'; save(); render(); window.scrollTo(0, 0); break;
+      case 'scrolltry': e.preventDefault(); { const t = document.getElementById('try'); if (t) t.scrollIntoView({behavior:'smooth'}); } break;
+      case 'try': tryScenario(Number(arg)); break;
+      case 'openpanel': openPanel(); break;
+      case 'closepanel': closePanel(); break;
+      case 'start': startTask(Number(arg)); break;
+      case 'end': endTask(Number(arg), 'ended by facilitator'); render(); break;
+      case 'score': { const [n, v] = arg.split(':').map(Number); if (S.tasks[n]) { S.tasks[n].success = S.tasks[n].success === v ? null : v; save(); render(); } } break;
+      case 'newsession': S.confirmNew = true; render(); break;
+      case 'newsession-no': S.confirmNew = false; render(); break;
+      case 'newsession-yes': newSession(); break;
+      case 'readyscreen': S.panel = false; S.view = 'ready'; save(); render(); break;
+      case 'copy': {
+        const isArc = arg === 'archive', text = isArc ? archive.join('\n\n') : summary();
+        const out = document.getElementById(isArc ? 'copied-archive' : 'copied'), ta = document.getElementById(isArc ? 'archive' : 'summary');
+        if (ta) ta.value = text;
+        const fallback = () => { if (ta) { ta.focus(); ta.select(); } if (out) out.textContent = 'Text selected. Copy it with Ctrl+C (⌘C on a Mac) or your phone’s Copy button.'; };
+        try { navigator.clipboard.writeText(text).then(() => { if (out) out.textContent = 'Copied.'; }, fallback); } catch (err) { fallback(); }
+      } break;
+      case 'mail': {
+        const M = MAILS[S.view], m = M && M.list.find(x => x.id === arg); if (!m) break;
+        /* An email stays read for the rest of the task, even if the participant comes back to the inbox. */
+        const key = `${S.view}:${arg}`;
+        S.mail = arg; if (!(S.mailSeen = S.mailSeen || []).includes(key)) S.mailSeen.push(key);
+        navAt = Date.now(); ev(`opened email: ${m.subject}`); save(); render();
+      } break;
+      case 'closemail': S.mail = null; navAt = Date.now(); save(); render(); break;
+      case 'solo': S.t1.solo = true; S.t1.joined = false; S.t1.codeErr = ''; ev('chose Apply on my own'); go('1C'); break;
+      case 'mark': {
+        const [id, kind] = arg.split(':'), m = S.t1.marks;
+        if (m[id] === kind) { delete m[id]; ev(`cleared ${id}`); }
+        else {
+          if (kind === 'first') Object.keys(m).forEach(k => { if (m[k] === 'first') delete m[k]; });
+          m[id] = kind; ev(`${id} ${kind}`);
+        }
+        S.t1.err = ''; save(); render();
+      } break;
+      case 'cantday': {
+        const d = arg, list = S.t1.cantDays, i = list.indexOf(d);
+        const prev = S.t1.prev = S.t1.prev || {};
+        if (i >= 0) { list.splice(i, 1); T.filter(t => t.day === d).forEach(t => { delete S.t1.marks[t.id]; if (prev[t.id]) { S.t1.marks[t.id] = prev[t.id]; delete prev[t.id]; } }); ev(`untick ${d}`); }
+        else { list.push(d); T.filter(t => t.day === d).forEach(t => { const m = S.t1.marks[t.id]; if (m && m !== 'cant') prev[t.id] = m; S.t1.marks[t.id] = 'cant'; }); ev(`tick ${d}`); }
+        save(); render();
+      } break;
+      case 'submit1': {
+        const hasFirst = T.some(t => !S.t1.cantDays.includes(t.day) && S.t1.marks[t.id] === 'first');
+        if (!hasFirst) { S.t1.err = 'Pick one First choice before you submit.'; ev('submit without first choice'); save(); render(); }
+        else { S.t1.err = ''; go('1D'); }
+      } break;
+      case 'numbers': S.numbersBack = S.view === '3A' ? '3A' : '4A'; go('4B'); break;
+      case 'lottery': S.lotteryBack = S.view === '1A' ? '1A' : '2B'; go('2C'); break;
+      case 'cant': {
+        const t3 = S.t3, i = t3.cant.indexOf(arg);
+        if (i >= 0) t3.cant.splice(i, 1); else t3.cant.push(arg);
+        const ok = fits(t3.cant, 'T03'); t3.dest = t3.dest.filter(id => ok.includes(id));
+        t3.err = ''; ev(`${i >= 0 ? 'free' : 'busy'} ${arg}`); save(); render();
+      } break;
+      case 'dest': {
+        if (S.t3.anyFit) break;
+        const t3 = S.t3, i = t3.dest.indexOf(arg);
+        if (i >= 0) t3.dest.splice(i, 1); else t3.dest.push(arg);
+        t3.dest.sort(); t3.err = ''; ev(`${i >= 0 ? 'unselect' : 'select'} ${arg}`); save(); render();
+      } break;
+      case 'review3': {
+        const t3 = S.t3, dest = t3.anyFit ? fits(t3.cant, 'T03') : t3.dest;
+        if (!dest.length) { t3.err = 'Choose at least one tutorial you could move to, or turn on “Any tutorial that fits my times”.'; ev('review without tutorials'); save(); render(); }
+        else { t3.final = dest.slice().sort(); go('3C'); }
+      } break;
+      case 'post3': S.t3.posted = true; go('3D'); break;
+      case 'cancel3': S.t3.cancelled = true; navAt = Date.now(); ev('cancelled request'); save(); render(); break;
+      case 'undo3': S.t3.cancelled = false; navAt = Date.now(); ev('undo cancel'); save(); render(); break;
+      case 'extra': { const x = S.t4.extra, i = x.indexOf(arg); if (i >= 0) x.splice(i, 1); else x.push(arg); x.sort(); ev(`${i >= 0 ? 'remove' : 'add'} ${arg}`); save(); render(); } break;
+      case 'post4': S.t4.posted = true; go('4D'); break;
+      case 'cancel4': S.t4.cancelled = true; navAt = Date.now(); ev('cancelled request'); save(); render(); break;
+      case 'undo4': S.t4.cancelled = false; navAt = Date.now(); ev('undo cancel'); save(); render(); break;
+      case 't5': S.t5.choice = arg; ev(`option: ${arg}`); save(); render(); break;
+      case 'add5': { const x = S.t5.added, i = x.indexOf(arg); if (i >= 0) x.splice(i, 1); else x.push(arg); x.sort(); save(); render(); } break;
+      case 'save5': S.t5.saved = true; ev(`saved extra: ${S.t5.added.join(',') || 'none'}`); save(); render(); break;
+      case 'sendgroup': S.t5.groupSent = true; ev('sent to group'); save(); render(); break;
+      case 'cancel5': S.t5.cancelled = true; navAt = Date.now(); ev('cancelled request'); save(); render(); break;
+      case 'undo5': S.t5.cancelled = false; S.t5.choice = null; navAt = Date.now(); ev('undo cancel'); save(); render(); break;
+    }
+  });
+  document.addEventListener('change', e => {
+    if (e.target.id === 'anyfit') { S.t3.anyFit = e.target.checked; S.t3.err = ''; ev(`any-fit ${e.target.checked ? 'on' : 'off'}`); save(); render(); }
+    if (e.target.id === 'sess') { S.sessionNo = e.target.value; save(); render(); }
+  });
+  document.addEventListener('input', e => { if (e.target.id === 'code') { S.t1.code = e.target.value; save(); } });
+  document.addEventListener('submit', e => {
+    if (!e.target.matches('[data-form="code"]')) return;
+    e.preventDefault();
+    if (tooSoon()) return;
+    const raw = (S.t1.code || '').trim(), norm = raw.toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if (!raw) { S.t1.codeErr = 'Enter the group code your friend sent you.'; ev('join with empty code'); save(); render(); return; }
+    if (norm === 'GRP4821' || norm === '4821') { S.t1.joined = true; S.t1.solo = false; S.t1.codeErr = ''; go('1C'); return; }
+    S.t1.codeErr = `We couldn’t find group “${raw}”. Check the code with your friend and try again.`;
+    ev(`wrong code: ${raw}`); save(); render();
+  });
+
+  /* Hidden entrance: press and hold the logo (or the envelope in the inbox) for about a second, tap it 5 times quickly, or press F on a keyboard. */
+  let lp = null, taps = [];
+  document.addEventListener('pointerdown', e => {
+    if (!e.target.closest('[data-lp]')) return;
+    clearTimeout(lp); lp = setTimeout(() => { lp = null; taps = []; openPanel(); }, 700);
+    const now = Date.now(); taps = taps.filter(t => now - t < 2000); taps.push(now);
+    if (taps.length >= 5) { taps = []; clearTimeout(lp); lp = null; openPanel(); }
+  });
+  ['pointerup','pointercancel'].forEach(t => document.addEventListener(t, () => { clearTimeout(lp); lp = null; }));
+  document.addEventListener('contextmenu', e => { if (e.target.closest('[data-lp]')) e.preventDefault(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && S.panel) { closePanel(); return; }   /* Esc works even with the Session menu or the results box focused */
+    const tag = (e.target.tagName || '').toLowerCase();
+    if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+    if (e.metaKey || e.ctrlKey || e.altKey || e.repeat) return;
+    if (e.key === 'f' || e.key === 'F' || e.code === 'KeyF') { S.panel ? closePanel() : openPanel(); }
+  });
+  window.addEventListener('popstate', e => {
+    const v = e.state && e.state.v;
+    if (S.panel) return;
+    /* During a test, Back may only move within the current task, and never onto its end screen (that would log a fake finish). */
+    if (S.mode === 'session') {
+      const n = S.active || S.lastTask;
+      const ok = n && v && TASK_VIEWS[n].includes(v) && TASKS[n].end !== v;
+      if (!ok) { try { history.pushState({v:S.view}, '', '#' + S.view); } catch (err) {} return; }
+    }
+    if (v && SCREENS[v]) go(v, {push:false});
+  });
+  setInterval(() => {
+    if (!S.panel) return;
+    document.querySelectorAll('[data-timer]').forEach(el => { const t = S.tasks[el.dataset.timer]; if (t && !t.end) el.textContent = fmt(Date.now() - t.start); });
+  }, 1000);
+
+  const hash = (location.hash || '').slice(1);
+  if (!saved && SCREENS[hash] && !['about','ready'].includes(hash)) { S.mode = 'session'; S.view = hash; }
+  if (hash === 'panel') S.panel = true;
+  if (hash === 'try' && S.mode !== 'session') S.view = 'about';
+  try { history.replaceState({v:S.view}, '', location.hash || ''); } catch (e) {}
+  render();
+  if (hash === 'try' && !S.panel) { const t = document.getElementById('try'); if (t) t.scrollIntoView(); }
+
+  /* Testing hook for the team: swapHall.go('3B') */
+  window.swapHall = {go: v => SCREENS[v] && go(v), startTask, state: () => S, noGuard: () => { guardOff = true; }};
+})();
+</script>
+
+</body></html>
